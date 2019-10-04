@@ -546,3 +546,17 @@ if (TBB_BUILD_TESTS)
   tbb_add_test (write_once_node)
   tbb_add_test (yield)
 endif ()
+
+if(APPLE)
+elseif(UNIX)
+elseif(WIN32)
+	#copying built lib to the output
+	add_custom_command(
+	TARGET tbb_static
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy
+	 $<TARGET_FILE:tbb_static>
+	 ${CMAKE_SOURCE_DIR}/../builtDependencies/windows/$<CONFIGURATION>/tbb_static.lib)		
+endif()
+
+file(COPY "include/" DESTINATION "${CMAKE_SOURCE_DIR}/../builtDependencies/includes/tbb")
