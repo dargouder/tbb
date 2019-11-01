@@ -548,6 +548,12 @@ if (TBB_BUILD_TESTS)
 endif ()
 
 if(APPLE)
+add_custom_command(
+	TARGET tbb_static
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy
+	 $<TARGET_FILE:tbb_static>
+	 ${CMAKE_SOURCE_DIR}/../builtDependencies/apple/$<CONFIGURATION>/libtbb_static.a)		
 elseif(UNIX)
 elseif(WIN32)
 	#copying built lib to the output
