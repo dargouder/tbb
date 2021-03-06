@@ -555,6 +555,12 @@ add_custom_command(
 	 $<TARGET_FILE:tbb_static>
 	 ${CMAKE_SOURCE_DIR}/../builtDependencies/apple/$<CONFIGURATION>/libtbb_static.a)		
 elseif(UNIX)
+add_custom_command(
+    TARGET tbb_static
+	POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy
+	 $<TARGET_FILE:tbb_static>
+	 ${CMAKE_SOURCE_DIR}/../builtDependencies/unix/$<CONFIGURATION>/libtbb_static.a)
 elseif(WIN32)
 	#copying built lib to the output
 	add_custom_command(
